@@ -25,11 +25,10 @@ var input = {
 }; 
 
 const output = JSON.parse(solc.compile(JSON.stringify(input)));
-console.log(output);
+// console.log(output.contracts['CampaignFactory.sol']['CampaignFactory'].evm.bytecode.object);
 fs.ensureDirSync(buildPath);
 
 Object.keys(output.contracts).forEach(file => {
-  console.log(file);
   Object.keys(output.contracts[file]).forEach(contract => {
     fs.outputJsonSync(
       path.resolve(buildPath, contract + '.json'),
