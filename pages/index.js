@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import factory from '../ethereum/factory';
-import { Card } from 'semantic-ui-react';
+import { Card, Button } from 'semantic-ui-react';
 // import 'semantic-ui-css/semantic.min.css';
+import CommonPage from '../components/CommonPage';
 
 export default class CampaignIndex extends Component {
 
@@ -25,14 +26,15 @@ export default class CampaignIndex extends Component {
 
   render() {
     return (
-      <div>
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
-        This is the home page!
-        <hr/>
-        { this.renderCampaigns() }
-        <hr/>
-        Hello
-      </div>
-    );
+      <CommonPage>
+        <link
+          rel="stylesheet"
+          href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
+        />
+        <h3>Open Campaigns</h3>
+        <Button floated='right' content='Create Campaign' icon='add' primary labelPosition='left' />
+        {this.renderCampaigns()}
+      </CommonPage>
+      );
+    }
   }
-}
