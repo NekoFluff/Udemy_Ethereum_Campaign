@@ -36,7 +36,7 @@ contract Campaign {
     }
     
     function createRequest(string memory description, uint requestValue, address payable recipient) public restricted {
-        require(contributors[msg.sender]);
+        require(manager == msg.sender, 'You must be the manager of this contract to create a request');
         require(address(this).balance >= requestValue, "Not enough money has been contributed for the request.");
         
         Request memory req = Request({
