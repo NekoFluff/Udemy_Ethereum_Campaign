@@ -3,7 +3,6 @@ import CommonPage from '../../components/CommonPage';
 import factory from '../../ethereum/factory';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
 import web3 from './../../ethereum/web3';
-import next from 'next';
 
 class NewCampaign extends Component {
   state = {

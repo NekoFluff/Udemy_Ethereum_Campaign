@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha",
     "compile": "node ./ethereum/compile",
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start"
   },
