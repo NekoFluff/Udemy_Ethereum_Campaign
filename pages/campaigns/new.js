@@ -3,6 +3,7 @@ import CommonPage from '../../components/CommonPage';
 import factory from '../../ethereum/factory';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
 import web3 from './../../ethereum/web3';
+import { Link, Router } from '../../routes';
 
 class NewCampaign extends Component {
   state = {
@@ -13,7 +14,7 @@ class NewCampaign extends Component {
 
   
   onSubmit = async (event) => {
-
+    
     try {
       // Start the loading circle and reset the error message
       this.setState({ loading: true, errorMessage: '' })
@@ -24,11 +25,13 @@ class NewCampaign extends Component {
         .createCampaign(this.state.minimumContribution)
         .send({
           from: accounts[0]
-        });  
-      } catch (err) {
-        this.setState({ errorMessage: err.message });
-      }
-      this.setState({ loading: false });
+        });
+
+      Router.pushRoute('/');
+    } catch (err) {
+      this.setState({ errorMessage: err.message });
+    }
+    this.setState({ loading: false });
 
       
   };
