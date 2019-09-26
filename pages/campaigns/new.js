@@ -14,6 +14,7 @@ class NewCampaign extends Component {
 
   
   onSubmit = async (event) => {
+    event.preventDefault();
     
     try {
       // Start the loading circle and reset the error message
@@ -32,8 +33,6 @@ class NewCampaign extends Component {
       this.setState({ errorMessage: err.message });
     }
     this.setState({ loading: false });
-
-      
   };
 
   render() {
@@ -49,7 +48,7 @@ class NewCampaign extends Component {
           </Form.Field>
 
           <Message error header='Something went wrong' content={this.state.errorMessage}/>
-          <Button primary loading={this.state.loading}>Create!</Button>
+          <Button primary loading={this.state.loading} disabled={this.state.loading}>Create!</Button>
         </Form>
       </CommonPage>
     );
