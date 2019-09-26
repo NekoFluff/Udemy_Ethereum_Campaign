@@ -3,6 +3,7 @@ import factory from '../ethereum/factory';
 import { Card, Button } from 'semantic-ui-react';
 // import 'semantic-ui-css/semantic.min.css';
 import CommonPage from '../components/CommonPage';
+import { Link } from '../routes';
 
 export default class CampaignIndex extends Component {
 
@@ -16,7 +17,7 @@ export default class CampaignIndex extends Component {
     const items = this.props.campaigns.map(address => {
       return {
         header: address,
-        description: <a>View Campaign</a>,
+        description: <Link route={`/campaigns/${address}`} ><a>View Campaign</a></Link>,
         fluid: true
       }
     });
@@ -28,7 +29,9 @@ export default class CampaignIndex extends Component {
     return (
       <CommonPage>
         <h3>Open Campaigns</h3>
-        <Button floated='right' content='Create Campaign' icon='add' primary labelPosition='left' />
+        <Link route='/campaigns/new'>
+          <a><Button floated='right' content='Create Campaign' icon='add' primary labelPosition='left' /></a>
+        </Link>
         {this.renderCampaigns()}
       </CommonPage>
       );
