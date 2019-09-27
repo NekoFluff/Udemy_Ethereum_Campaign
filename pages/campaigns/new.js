@@ -47,7 +47,7 @@ class NewCampaign extends Component {
             }} />
           </Form.Field>
 
-          <Message error header='Something went wrong' content={this.state.errorMessage}/>
+          <Message error header='Oops! Something went wrong' content={this.state.errorMessage}/>
           <Button primary loading={this.state.loading} disabled={this.state.loading}>Create!</Button>
         </Form>
       </CommonPage>

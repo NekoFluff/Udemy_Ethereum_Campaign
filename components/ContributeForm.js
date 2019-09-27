@@ -11,7 +11,6 @@ class ContributeForm extends Component {
     loading: false
   }
 
-
   onSubmit = async (event) => {
     event.preventDefault();
 
@@ -44,7 +43,7 @@ class ContributeForm extends Component {
           }}/>
 
         </Form.Field>
-        <Message error header='Something went wrong' content={this.state.errorMessage}/>
+        <Message error header='Oops! Something went wrong' content={this.state.errorMessage}/>
         <Button primary loading={this.state.loading} disabled={this.state.loading}>Contribute!</Button>
       </Form>
 
