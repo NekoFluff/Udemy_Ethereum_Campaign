@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import CommonPage from './../../../components/CommonPage';
-import { Button, Table } from 'semantic-ui-react';
-import { Link } from '../../../routes';
-import Campaign from '../../../ethereum/campaign';
-import RequestRow from './../../../components/RequestRow';
+import React, { Component } from "react";
+import CommonPage from "./../../../components/CommonPage";
+import { Button, Table } from "semantic-ui-react";
+import { Link } from "../../../routes";
+import Campaign from "../../../ethereum/campaign";
+import RequestRow from "./../../../components/RequestRow";
 class RequestIndex extends Component {
-  state = {  }
+  state = {};
 
   static async getInitialProps(props) {
     const { address } = props.query;
@@ -14,28 +14,39 @@ class RequestIndex extends Component {
     const contributorCount = await campaign.methods.contributorCount().call();
 
     const requests = await Promise.all(
-      Array(Number(requestCount)).fill().map((_, index) => {
-        return campaign.methods.requests(index).call();
-      })
-    )
+      Array(Number(requestCount))
+        .fill()
+        .map((_, index) => {
+          return campaign.methods.requests(index).call();
+        })
+    );
     return { address, requests, requestCount, contributorCount };
   }
 
   renderRows = () => {
     return this.props.requests.map((request, index) => {
-      return <RequestRow request={request} id={index} key={index} address={this.props.address} contributorCount={this.props.contributorCount}/>
-    })
-  }
+      return (
+        <RequestRow
+          request={request}
+          id={index}
+          key={index}
+          address={this.props.address}
+          contributorCount={this.props.contributorCount}
+        />
+      );
+    });
+  };
 
-
-  render() { 
+  render() {
     const { Header, Row, HeaderCell, Body } = Table;
-    return ( 
+    return (
       <CommonPage>
         <h3>Requests</h3>
         <Link route={`/campaigns/${this.props.address}/requests/new`}>
           <a>
-            <Button primary floated="right" style={{ marginBottom: 10 }}>Add Request</Button>
+            <Button primary floated="right" style={{ marginBottom: 10 }}>
+              Add Request
+            </Button>
           </a>
         </Link>
         <Table>
@@ -50,14 +61,12 @@ class RequestIndex extends Component {
               <HeaderCell>Finalize</HeaderCell>
             </Row>
           </Header>
-          <Body>
-            {this.renderRows()}
-          </Body>
+          <Body>{this.renderRows()}</Body>
         </Table>
         <h2>{this.props.requestCount} requests found</h2>
       </CommonPage>
     );
   }
 }
- 
+
 export default RequestIndex;

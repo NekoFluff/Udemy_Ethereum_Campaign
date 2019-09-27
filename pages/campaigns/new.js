@@ -1,24 +1,23 @@
-import React, { Component } from 'react';
-import CommonPage from '../../components/CommonPage';
-import factory from '../../ethereum/factory';
-import { Form, Button, Input, Message } from 'semantic-ui-react';
-import web3 from '../../ethereum/web3';
-import { Router } from '../../routes';
+import React, { Component } from "react";
+import CommonPage from "../../components/CommonPage";
+import factory from "../../ethereum/factory";
+import { Form, Button, Input, Message } from "semantic-ui-react";
+import web3 from "../../ethereum/web3";
+import { Router } from "../../routes";
 
 class NewCampaign extends Component {
   state = {
-    minimumContribution: '',
-    errorMessage: '',
+    minimumContribution: "",
+    errorMessage: "",
     loading: false
-  }
+  };
 
-  
-  onSubmit = async (event) => {
+  onSubmit = async event => {
     event.preventDefault();
-    
+
     try {
       // Start the loading circle and reset the error message
-      this.setState({ loading: true, errorMessage: '' })
+      this.setState({ loading: true, errorMessage: "" });
 
       // Retrieve user accounts and create a new campaign using the CampaignFactory
       const accounts = await web3.eth.getAccounts();
@@ -28,7 +27,7 @@ class NewCampaign extends Component {
           from: accounts[0]
         });
 
-      Router.pushRoute('/');
+      Router.pushRoute("/");
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
@@ -42,13 +41,29 @@ class NewCampaign extends Component {
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
             <label>Minimum Contribution</label>
-            <Input label='wei' labelPosition='right' type='number' value={this.state.minimumContribution} onChange={(event) => {
-              this.setState({ minimumContribution: event.target.value })
-            }} />
+            <Input
+              label="wei"
+              labelPosition="right"
+              type="number"
+              value={this.state.minimumContribution}
+              onChange={event => {
+                this.setState({ minimumContribution: event.target.value });
+              }}
+            />
           </Form.Field>
 
-          <Message error header='Oops! Something went wrong' content={this.state.errorMessage}/>
-          <Button primary loading={this.state.loading} disabled={this.state.loading}>Create!</Button>
+          <Message
+            error
+            header="Oops! Something went wrong"
+            content={this.state.errorMessage}
+          />
+          <Button
+            primary
+            loading={this.state.loading}
+            disabled={this.state.loading}
+          >
+            Create!
+          </Button>
         </Form>
       </CommonPage>
     );
