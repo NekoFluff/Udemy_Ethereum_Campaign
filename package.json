@@ -11,7 +11,7 @@
     "build": "next build",
     "start": "next start"
   },
-  "author": "",
+  "author": "Alex Nou",
   "license": "ISC",
   "dependencies": {
     "@truffle/hdwallet-provider": "^1.0.18",
